@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>gugudan</title>
+</head>
+
+<body>
+
+<script>
+    var num = prompt('For which number?', '1 ~ 9');
+    
+    if (num == '' || isNaN(num)) {
+        alert('Insert valid number.');
+    } else if (num < 1 || 9 < num) {
+        alert("Insert 1 ~ 9");
+    } else {
+        for (var i = 1; i < 10; i++) {
+            document.write(num + ' * ' + i + ' = ' + num * i + '<br/>');
+        }
+    }
+    
+</script>
+
+</body>
+</html>
