@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>from object</title>
+    <style>
+        label{
+            float: left;
+            width: 80px;
+        }
+        input,label{
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <form name="frm">
+        <label for="myId_name">ID: </label>
+        <input type="text" id="myId" name="myId_name"/>
+        <label for="pwd">password: </label>
+        <input type="password" id="pwd" name="pwd_name"/>
+        <input type="button" name="send" value="login"/>
+    </form>
+    
+    <br/>
+    <br/>
+    
+    <form name="frm2">
+        <input type="text" name="text_name" />
+        <input type="button" onclick="put_text()" value="click" />
+    </form>
+
+
+<script>
+    var frm = document.frm;  // form 객체 지정
+    var myId = frm.myId;     // id 사용
+    var pwd = frm.pwd;
+    var send_btn = document.frm.send;  // name 사용
+    
+    send_btn.onclick = function () {
+        var newId = myId.value;
+        var newPwd = pwd.value;
+        
+        if (newId == '' || newPwd == '') {
+            alert('Insert ID and password');
+        } else {
+            alert('Welcome, ' + myId.value);
+        }
+    };
+    
+    
+    function put_text() {
+        // from 요소에 접근 2
+        var frm2_text = document.forms['frm2']['text_name'];
+        console.log(frm2_text);
+        frm2_text.value = "Input Text";
+    };
+</script>
+
+</body>
+</html>
