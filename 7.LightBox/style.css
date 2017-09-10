@@ -1,0 +1,66 @@
+*{margin: 0;}
+body{ padding: 20px; }
+h1,h2,h3,h4,p{ font-weight: normal; margin: 5px 0; }
+
+#lightbox.active{
+	position: absolute;
+	overflow: hidden; /* 내용이 지정한 영역보다 클 때 해당 부분 자름. scroll, visible, auto*/
+	background: #333;
+	width: 800px; height: 600px;
+	left: 50%; margin-left: -400px;
+	top: 50%; margin-top: -300px;
+	box-sizing: border-box; padding: 30px;
+	z-index: 99;
+	display: block;
+}
+/* "#" : id선택자. html 문서 안에서 딱 1번만 선택될때 사용 */
+#lightbox{
+	display: none;
+}
+#lightbox h1, #lightbox p{
+	color: white;
+	text-align: center;
+	margin-bottom: 10px
+}
+
+figure{
+	width: 600px; height: 400px;
+	position: relative;
+	margin: 10px auto;
+	overflow: hidden;
+}
+figure img{
+	display: none; /* 공간 차지하지 않음 */
+	position: absolute;
+}
+figure img.active{
+	display: block; /* 한 줄 점유. inline은 같은 줄에 연결 */
+}
+
+/* "." : class 선택자. 복수로 선택할때 */
+.btn-close{
+	position: absolute; /* 부모 기준으로 offset 설정 가능(부모의 position이 static 이거나, 부모가 없는 경우 브라우저 기준) */
+	top: 0px; right: 0px;
+	padding: 10px;
+	color: white; font-size: large;
+}
+.btn-close:hover{ background-color: #666; }
+
+
+#block{
+	position: fixed;
+	width: 100%; height: 100%;
+	top: 0; bottom: 0; left: 0; right: 0;
+	background: #111;
+	opacity: 0.5; z-index: 9;
+	display: none;
+}
+#block.active{ display: block; }
+
+.indicator{ text-align: center; }
+.indicator button{
+	background: #666; color: white;
+	font-size: 12px;
+	border: none; padding: 2px 5px;
+}
+.indicator button:focus{ background: #38f; }
