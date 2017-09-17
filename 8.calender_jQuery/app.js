@@ -1,7 +1,8 @@
 function calender(new_year, new_month) {
-	var caption_year = document.querySelector('.year');
-	var caption_month = document.querySelector('.month');
-	var start_day = document.querySelectorAll('tr td');
+	// 변수명 앞의 $은 jQuery 선택자를 지정한 변수라는 의미
+	var $caption_year = $('.year');
+	var $caption_month = $('.month');
+	var $start_day = $('tr td');
 	
 	// 해당 월의 총 일수 구하기
 	// 9월(index 8)의 경우 30일(index 29)까지 있으므로, Date객체는 10월 3일(index 2)을 가리킴
@@ -12,33 +13,34 @@ function calender(new_year, new_month) {
 	var month = d.getMonth();
 	var date = d.getDate();
 	var day = d.getDay();
-	
-	for (var i = 0; i < start_day.length; i++) {
-		start_day[i].innerHTML = '&nbsp;';
-	}
+
+    // for문 대신 jQuery 반복문인 each() 메서드 사용
+	$start_day.each(function (i) {
+		$(this).html('&nbsp;');
+	});
 	
 	for (var i = day; i < day + d_length; i++) {
-		start_day[i].innerHTML = date;
+		$start_day.eq(i).html(date);
 		date++;
 	}
 	
-	caption_year.innerHTML = year;
-	caption_month.innerHTML = month + 1;
+	$caption_year.html(year);
+	$caption_month.html(month + 1);
 }
 
 (function() {
-	var prev = document.getElementById('prev');
-	var next = document.getElementById('next');
+	var $prev = $('#prev');
+	var $next = $('#next');
 	year = new Date().getFullYear();
 	month = new Date().getMonth() + 1;
 	
 	calender(year, month);
 	
-	prev.onclick = function () {
+	$prev.click(function () {
 		calender(year, --month);
-	};
+	});
 	
-	next.onclick = function () {
+	$next.click(function () {
 		calender(year, ++month);
-	}
+	});
 })();
