@@ -1,0 +1,97 @@
+header{
+	position: absolute;
+	width: 100%;
+	text-align: center;
+	height: 80px;
+	background: white;
+	z-index: 9;
+}
+header h1{
+	text-align: center;
+	font-weight: normal;
+	line-height: 80px;
+}
+
+
+.container{
+	position: absolute;
+	width: 100%; height: 100%;
+	margin: 0px auto;
+	/* 3D 시점을 부여하고 원근감perspective을 설정해 줌.
+	   픽셀 값으로 시점의 거리를 지정하는 것으로, 픽셀 값이 적으면 왜곡이 커짐 */
+	perspective: 800px;
+	overflow: hidden;
+	box-sizing: border-box;
+}
+.wrapper{
+	width: 100%; height: 100%;
+	position: relative;
+	margin: auto;
+	/* 3d 객체(.page)의 부모인 .wrapper에서 transform 속성에 perserve-3d를 설정해 주면
+	   내부 3d 페이지의 3d 공간계가 활성화 됨. 실제 박스의 공간 배치는 js에서 CSS 속성값으로 제어 */
+	transform-style: preserve-3d;
+	transition-duration: 1s;
+}
+
+.wrapper > .page{ /* ">" child selector. 바로 하위에 있을때만 선택함. 더 밑에 있으면 제외 */
+	position: absolute;
+	width: 100%; height: 100%;
+	left: 0; top: 0;
+	padding-top: 80px;
+	backface-visibility: hidden;
+}
+.page > h1{
+	padding: 20px;
+	color: #999;
+}
+.wrapper > .page:nth-child(1){
+	background-image: url('../images/img01.jpg');
+	background-size: cover;
+}
+.wrapper > .page:nth-child(2){
+	background-image: url('../images/img02.jpg');
+	background-size: cover;
+}
+.wrapper > .page:nth-child(3){
+	background-image: url('../images/img03.jpg');
+	background-size: cover;
+}
+.wrapper > .page:nth-child(4){
+	background-image: url('../images/img04.jpg');
+	background-size: cover;
+}
+
+#indicator{
+	text-align: center;
+	margin-top: 20px;
+	position: absolute;
+	left: 0; right: 0; bottom: 20px;
+}
+#indicator li{
+	display: inline-block;
+	font-size: 12px;
+	padding: 5px 10px;
+	margin: 5px;
+	border: 1px solid #999;
+	border-radius: 50%;
+	color: white;
+}
+#indicator li.active{
+	background-color: rgba(50%,50%,50%,0.5);
+	color: white;
+}
+ul.icons{
+	overflow: hidden;
+	padding: 64px;
+}
+ul.icons > li {
+	display: inline-block;
+	margin: 0 24px 64px 24px;
+	background: #999;
+	padding: 10px;
+	width: 48px; height: 48px;
+	border-radius: 15px;
+	text-align: center;
+	border: 1px solid rgba(100, 100, 100, 0.3);
+	color: white;
+}
