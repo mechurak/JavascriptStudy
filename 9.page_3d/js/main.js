@@ -8,6 +8,9 @@ var indicator_num = 1;
 var indicator_length = page.length;
 var w = page[0].offsetWidth;
 var page_angle = 0;
+var page_vector = 0;
+
+var hammer = new Hammer(wrapper);
 
 function init_page() {
 	w = page[0].offsetWidth;
@@ -52,6 +55,21 @@ for (var i = 0; i < indicator_li.length; i++) {
 		change_page(indicator_num);
 	});
 }
+
+hammer.on('swipeleft', function (e) {
+	page_vector = (indicator_num < indicator_length) ? 1 : 0;
+	
+	indicator_num += page_vector;
+	change_page(indicator_num);
+});
+
+hammer.on('swiperight', function (e) {
+	page_vector = (indicator_num > 1) ? -1 : 0;
+	
+	indicator_num += page_vector;
+	change_page(indicator_num);
+});
+
 
 window.onresize = function () {
 	init_page();
