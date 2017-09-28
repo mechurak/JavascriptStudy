@@ -59,7 +59,7 @@ function bgm_init() {
 ball_init();
 setInterval(function () {
 	animate_balloon();
-}, 1000/30);
+}, 1000/30);  // 1000ms / 30fps
 bgm_init();
 
 
@@ -78,6 +78,9 @@ sound_btn.onclick = function (event) {
 		sound_btn.setAttribute('src', 'images/sound_on.png');
 		bgm[0].play();
 	}
+
+	// 이벤트 버블링 차단
+	// 사운드 버튼이 배너 영역 안에 있어서, 차단해 주지 않을 경우, 배너에도 클릭 이벤트가 전달됨
 	event.stopPropagation();
 	console.log("sound_btn. end");
 }
@@ -88,7 +91,7 @@ toggle.onclick = function () {
 	if (attr == 'active') {
 		banner.removeAttribute('class');
 		toggle.innerHTML = '배너 열기';
-		return false;
+		return false;  // 버튼 객체가 <a> 요소라 클릭 시 문서가 이동하는 기본이벤트가 발생하는데, 이를 방지
 	} else {
 		banner.setAttribute('class', 'active');
 		toggle.innerHTML = '배너 닫기';
