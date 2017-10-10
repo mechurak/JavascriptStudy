@@ -1,11 +1,11 @@
-var banner = document.getElementById('banner');
-var img = document.getElementsByTagName('img');
-var toggle = document.getElementById('toggle');
-var sound_btn = document.getElementById('sound_btn');
+var $banner = $('#banner');
+var $img = $banner.find('img');
+var $toggle = $('#toggle');
+var $sound_btn = $('#sound_btn');
 
 // 속정 값 읽는 것은 인라인 스타일 속성만 가능하다.
 // 태그 밖에서 작성된 CSS 속성은 전역 객체(window)의 getComputedStyle() 을 사용해야 한다.
-var banner_height = getComputedStyle(banner).height;
+var $banner_height = $banner.css('height');
 var cast = [];
 
 function set_balloon(num) {
@@ -25,33 +25,35 @@ function set_balloon(num) {
 }
 
 function ball_init() {
-	for (var i = 0; i < img.length; i++) {
+	$img.each(function (i) {  // 함수의 매개변수 i는 배열 인덱스 번호
 		set_balloon(i);
-		img[i].style.left = "-9999px";
-		img[i].style.top = "-9999px";
-	}
+		$img.eq(i)
+			.css('left', '-9999px')
+			.css('top', '-9999px');
+	});
 }
 
 function animate_balloon() {
-	for (var i = 0; i < img.length; i++) {
-		img[i].style.left = cast[i].x + "px";
-		img[i].style.top = cast[i].y + "px";
-		img[i].style.transform = "rotate(" + cast[i].angle + "deg)";
-		
-		if (cast[i].y < parseInt(banner_height)) {
+	$img.each(function (i) {
+		$img.eq(i)
+			.css('left', cast[i].x + 'px')
+			.css('top', cast[i].y + 'px')
+			.css('transform', 'rotate(' + cast[i].angle + 'deg)');
+			
+		if (cast[i].y < parseInt($banner_height)) {
 			cast[i].y += 1 + cast[i].speed;
 			cast[i].angle += cast[i].speed;
 		} else {
 			set_balloon(i);
 		}
-	}
+	});
 }
 
 function bgm_init() {
 	var bgm = new Audio();
 	bgm.src = "images/bgm.mp3";
 	bgm.loop = true;
-	document.body.appendChild(bgm);
+	$('body').append(bgm);
 }
 
 
@@ -64,18 +66,18 @@ bgm_init();
 
 
 
-sound_btn.onclick = function (event) {
-	var attr = sound_btn.getAttribute('class');
-	var bgm = document.getElementsByTagName('audio');
+$sound_btn.click(function (event) {
+	var attr = $(this).attr('class');
+	var bgm = $('audio');
 	console.log("sound_btn. " + attr);
 	
 	if (attr == 'active') {
-		sound_btn.removeAttribute('class');
-		sound_btn.setAttribute('src', 'images/sound_off.png');
+		$(this).removeAttr('class');
+		$(this).attr('src', 'images/sound_off.png');
 		bgm[0].pause();
 	} else {
-		sound_btn.setAttribute('class', 'active');
-		sound_btn.setAttribute('src', 'images/sound_on.png');
+		$(this).attr('class', 'active');
+		$(this).attr('src', 'images/sound_on.png');
 		bgm[0].play();
 	}
 
@@ -83,22 +85,22 @@ sound_btn.onclick = function (event) {
 	// 사운드 버튼이 배너 영역 안에 있어서, 차단해 주지 않을 경우, 배너에도 클릭 이벤트가 전달됨
 	event.stopPropagation();
 	console.log("sound_btn. end");
-}
+});
 
-toggle.onclick = function () {
-	var attr = banner.getAttribute('class');
+$toggle.click(function () {
+	var attr = $banner.attr('class');
 	
 	if (attr == 'active') {
-		banner.removeAttribute('class');
-		toggle.innerHTML = '배너 열기';
+		$banner.removeAttr('class');
+		$(this).html('배너 열기');
 		return false;  // 버튼 객체가 <a> 요소라 클릭 시 문서가 이동하는 기본이벤트가 발생하는데, 이를 방지
 	} else {
-		banner.setAttribute('class', 'active');
-		toggle.innerHTML = '배너 닫기';
+		$banner.attr('class', 'active');
+		$toggle.html('배너 닫기');
 		return false;
 	}
-}
+});
 
-banner.onclick = function () {
+$banner.click(function () {
 	window.open('https://mechurak.github.io/', '_blank');
-}
+});
