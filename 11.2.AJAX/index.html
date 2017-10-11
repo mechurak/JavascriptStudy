@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AJAX</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+</head>
+
+<body>
+<script>
+	// $.ajax()
+	$(function () {
+		$.ajax({
+			url: 'book.xml',
+			dataType: 'xml',
+			success: function (data) {
+				$('body').append("<h1>XML</h1>");
+				$(data).find('book').each(function () {
+					var title = $('title', this).text();
+					var author = $('author', this).text();
+					var price = $('price', this).text();
+					var txt = "<li>" + title + ", " + author + ", " + price + "</li><hr>";
+					$('body').append(txt);
+				})
+			}
+		})
+	});
+	
+	// $.getJSON() : ajax() 메서드의 축약형으로 JSON 데이터에 특화되어 있음
+	$(function () {
+		$.getJSON('book.json', function (data) {
+			$('body').append("<h1>JSON</h1>");
+			var books = data.book;
+			$(books).each(function(i, obj) {
+				var title = obj.title;
+				var author = obj.author;
+				var price = obj.price;
+				var txt = "<li>" + title + ", " + author + ", " + price + "</li><hr>";
+				$('body').append(txt);
+			});
+		});
+	});
+</script>
+
+</body>
+</html>
