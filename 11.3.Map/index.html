@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Contact us</title>
+	<link href="style.css" rel="stylesheet" />
+	<!-- This stylesheet contains specific styles for displaying the map
+     on this page. Replace it with your own styles as described in the
+     documentation:
+     https://developers.google.com/maps/documentation/javascript/tutorial
+    <link rel="stylesheet" href="/maps/documentation/javascript/demos/demos.css">
+    -->
+</head>
+
+<body>
+
+	<header>
+		<h1>Map Test</h1>
+		<nav>
+			<span><a href="#">Home</a></span>
+			<span><a href="#">About</a></span>
+			<span><a href="#">Contact Us</a></span>
+		</nav>
+	</header>
+	<main>
+		<figure class="banner">
+			<div class="figure_header">
+				<h2>Contact us</h2>
+				<p>문의사항 있으면 연락 주세요.</p>
+			</div>
+		</figure>
+		<section>
+			<article>
+				<p>임시 위치는 아래와 같습니다. 구글맵 API 테스트를 위한 페이지 입니다.</p>
+				<div id="map"><br>&nbsp;지도가 표시될 영역</div>
+			</article>
+			<aside>
+				<form action="">
+					<fieldset>
+						<legend>Send us Email</legend>
+						<div class="form-group">
+							<label for="name">Name</label>
+							<input type="text" id="name" name="name">
+						</div>
+						<div class="form-group">
+							<label for="phone">Phone</label>
+							<input type="text" id="phone" name="phone">
+						</div>
+						<div class="form-group">
+							<label for="email">Email</label>
+							<input type="email" id="email" name="email">
+						</div>
+						<div class="form-group">
+							<label for="msg">Message</label>
+							<textarea name="msg" id="msg" cols="30" rows="8"></textarea>
+						</div>
+						<div class="form-group">
+							<button>SEND</button>
+						</div>
+					</fieldset>
+				</form>
+			</aside>
+		</section>
+	</main>
+
+	<script>
+		function initMap() {
+			var myLatLng = { lat: 37.513031, lng: 127.059887 };
+
+			// Create a map object and specify the DOM element for display.
+			var map = new google.maps.Map(document.getElementById('map'), {
+				center: myLatLng,
+				zoom: 17
+			});
+
+			// Create a marker and set its position.
+			var marker = new google.maps.Marker({
+				map: map,
+				position: myLatLng,
+				title: 'Hello World!'
+			});
+			
+			var infoWindow = new google.maps.InfoWindow({
+				map: map
+			});
+			infoWindow.setPosition(myLatLng);
+			infoWindow.setContent('아셈타워');
+
+		}
+	</script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8PT6dlNYCO4IT4d49Vu_tyTXiEhbbRkU&callback=initMap"
+	async defer></script>
+
+</body>
+
+</html>
