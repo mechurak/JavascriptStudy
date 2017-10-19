@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>ES6</title>
+</head>
+
+<body>
+	<script>
+		"use strict";  // 문법을 엄격하게 적용함
+
+		class Character {
+			constructor(name, job) {
+				this.name = name;
+				this.job = job;
+			}
+			move() {
+				document.write(this.name + ' ' + this.job + ' 캐릭터 이동<br>');
+			}
+		}
+		
+		// 자식 클래스
+		class Monster extends Character {
+			constructor(name, job, skill) {
+				super(name, job);
+				this.skill = skill;
+			}
+			useSkill() {
+				document.write(this.name + ' ' + this.job + ' ' + this.skill + ' 스킬 사용<br>');
+			}
+		}
+
+		let char1 = new Character('루이스', '기사');
+		let monster = new Monster('오크', '대장', '몽둥이');
+		
+		char1.move();
+		monster.useSkill();
+		monster.move();
+	</script>
+
+</body>
+
+</html>

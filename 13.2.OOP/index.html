@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>OOP</title>
+</head>
+
+<body>
+	<script>
+		function Character(name, job) {
+			this.name = name;
+			this.job = job;
+
+			// this.move = function () {
+			// 	document.write(this.name + ' ' + this.job + ' 캐릭터 이동<br>');
+			// }
+			// 속성은 생성되는 인스턴스마다 다른 값을 적용해야 하므로 개별 영역이 필요함.
+			// 메서드는 모든 인스턴스가 함께 쓰므로, 속성보다는 prototype 에 정의하는 것이 바람직함
+		}
+
+		// Character.prototype.move = function () {
+		// 	document.write(this.name + ' ' + this.job + ' 캐릭터 이동<br>');
+		// };
+		// Character.prototype.attack = function () {
+		// 	document.write(this.name + ' ' + this.job + ' (이)가 공격<br>');
+		// };
+		// Character.prototype.escape = function () {
+		// 	document.write(this.name + ' ' + this.job + ' (이)가 도망<br>');
+		// };
+		// Character.prototype.dead = function () {
+		// 	document.write(this.name + ' ' + this.job + ' (이)가 죽었습니다.<br>');
+		// };
+
+
+		// 메서드가 다수일 경우 함수식으로 작성하면 장황해짐
+		// 아래와 같이 객체 리터럴로 표현하면 간결해짐
+		Character.prototype = {
+			move: function() {
+				document.write(this.name + ' ' + this.job + ' 캐릭터 이동<br>');
+			},
+			attack: function() {
+				document.write(this.name + ' ' + this.job + ' (이)가 공격<br>');
+			},
+			escape: function() {
+				document.write(this.name + ' ' + this.job + ' (이)가 도망<br>');
+			},
+			dead: function() {
+				document.write(this.name + ' ' + this.job + ' (이)가 죽었습니다.<br>');
+			}
+		}
+
+		var char1 = new Character('루이스', '기사');
+		var char2 = new Character('플레네', '마법사');
+
+		char1.move();
+		char1.attack();
+		char2.move();
+		char2.escape();
+		char1.dead();
+	</script>
+
+</body>
+
+</html>
