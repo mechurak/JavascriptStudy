@@ -95,10 +95,10 @@ $(function () {
 		$(this).css('zIndex', '99');
 	})
 	
-	$('#sticky_wrap').on('touchmouse', '.top_nav', function (e) {
+	$('#sticky_wrap').on('touchmove', '.top_nav', function (e) {
 		var $sticky = $(this).parent();
 		var event = e.originalEvent;  // jQeury 에서 기존 자바스크립트 이벤트를 받을 때 필요
-		var touchObj = event.changedTouched[0];
+		var touchObj = event.changedTouches[0];
 		
 		var x = parseInt(touchObj.clientX);
 		var y = parseInt(touchObj.clientY);
