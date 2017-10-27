@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>jQuery DOM Manipulation</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<style>
+			.select {
+				background: red;
+			}
+	</style>
+</head>
+
+<body>
+	<ul>
+		<li>Home</li>
+		<li>Portfolio</li>
+		<li>About</li>
+		<li class="select">Contact</li>
+	</ul>
+	
+	<h1>객체 이동</h1>
+	<figure>
+		<p>p0</p>
+		<p>p1</p>
+		<p>p2</p>
+		<p>p3</p>
+		<p>p4</p>
+	</figure>
+	<button onclick="img_move()">appendTo</button>
+
+	<script>
+		$(function () {
+			// 15.4.1, 15.4.2 클래스 속성 조작
+			$('li').first().addClass('select');
+			$('li').first().addClass('tempClass');  // class="select tempClass" 형태로 들어감. 선택자에서도 둘다 사용 가능
+			
+			var attr = $('li').last().attr('class');
+			console.log(attr);
+			$('li').last().removeClass('select');
+			var attr = $('li').last().attr('class');
+			console.log(attr);
+			
+			$('li').first().attr('style', 'border: 3px solid');
+			
+			// 15.4.4 문서  정보 조작 
+			$('li').first().html('<h1>HTML 추가</h1>');
+			$('li').last().text('<h1>HTML 추가</h1>');
+			var html = $('li').first().html();
+			var text = $('li').first().text();
+			console.log(html);  // "<h1>HTML 추가</h1>"
+			console.log(text);  // "HTML 추가"
+			
+			// 15.4.5 문서 객체 추가
+			$('ul').append('<li>append</li>').children('li').last().css('border', '3px solid');
+			$('ul').prepend('<li>prepend</li>').children('li').first().css('border', '3px solid');
+			
+		});
+		
+		// 15.4.6 문서 객체 이동
+		function img_move() {
+			$('p').first().appendTo('figure');
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>jQuery Selector</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+</head>
+
+<body>
+	<h1>jQuery 선택자 테스트</h1>
+	
+	<h2>타입 선택자</h2>
+	<h3 id="myId">아이디 선택자</h3>
+	<h3 class="myClass">클래스 선택자</h3>
+	
+	<h2>필터 메서드</h2>
+	<ul>
+		<li>first</li>
+		<li>second</li>
+		<li>third</li>
+		<li class="fourth">fourth</li>
+		<li><em>fifth</em></li>
+		<li>sixth</li>
+	</ul>
+	
+	<div class="parent">
+		<div>
+			<h1 class="h1Temp">heading 1</h1>
+			<h2>heading 2</h2>
+			<p>손자 p</p>
+		</div>
+		<p class="child">자식 p1</p>
+		<p>자식 p2</p>
+	</div>
+	
+	<script>
+		// 15.2 jQuery 객체와 메서드
+		// 문서 로딩 완료후 함수 실행
+		$(document).ready(function () {
+			alert('hello jQuery1');
+		});
+		
+		// $(document).ready() 의 축약식
+		$(function () {
+			alert('hello jQuery2');
+		});
+		
+		
+		// 15.3.1 선택자 사용하기
+		$(document).ready(function () {
+			$('*').css('font-family', 'sans-serif');
+			$('h2').css('color', 'red');
+			$('#myId').css('color', 'blue');
+			$('.myClass').css('color', 'green');
+		});
+		
+		// 15.3.2 필터 메서드
+		$(document).ready(function () {
+			$('li').eq(1).css('font-size', '2em');  // 1번 인덱스 선택
+			$('li').filter('.fourth').css('font-style', 'italic');  // .fourth 인 애들만
+			$('li').first().css('background-color', 'orange');  // 
+			$('li').last().css('border', '3px solid');
+			$('li').has('em').css('border', '3px dotted');  // em 을 자식 요소로 가지는 애들만
+		});
+		
+		// 15.3.3 DOM 탐색 메서드
+		$(document).ready(function () {
+			$('.parent').children().css('font-style', 'italic');  // 후손 전체
+			$('.h1Temp').parent().css('border', '3px solid');  // .h1Temp 의 부모 div 선택
+			$('.child').parents('.parent').css('border', '6px double');  // 조상들중에서 .parent 탐색
+			$('.parent').find('h2').css('background', 'gray');  // 후손들중 h2 인 요소
+			
+			$('.parent > div').siblings().css('font-size', '10px') // .parent의 자식 div의 형제 요소 선택 (자식 p1, p2)
+			$('.parent h2').prev().css('border','3px dotted');  // .parent 후손 h2의 이전 형제 (heading 1)
+			$('.parent h2').next().css('border','3px double');  // .parent 후손 h2의 다음 형제 (손자p)
+			
+		});
+		
+	</script>
+</body>
+</html>
